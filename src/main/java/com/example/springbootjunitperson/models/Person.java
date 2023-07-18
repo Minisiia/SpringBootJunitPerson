@@ -7,14 +7,10 @@ import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 import jakarta.validation.constraints.*;
 
-
-
 import java.util.Objects;
 import java.util.Set;
 
-/**
- * @author Neil Alishev
- */
+
 @Entity
 @Table(name = "Person")
 public class Person {
