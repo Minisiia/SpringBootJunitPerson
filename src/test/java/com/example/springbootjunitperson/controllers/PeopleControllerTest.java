@@ -2,10 +2,10 @@ package com.example.springbootjunitperson.controllers;
 
 import com.example.springbootjunitperson.models.Person;
 import com.example.springbootjunitperson.services.PeopleService;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Timeout;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,15 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.MapBindingResult;
 
+import java.util.Collections;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -30,6 +38,16 @@ class PeopleControllerTest {
     private PeopleService peopleService;
 
     private Person person;
+
+    @BeforeAll
+    public static void initBeforeAll(){
+        System.out.println("Before All init() method called");
+    }
+
+    @AfterAll
+    public static void afterAll(){
+        System.out.println("After All init() method called");
+    }
 
     @BeforeEach
     public void init() {

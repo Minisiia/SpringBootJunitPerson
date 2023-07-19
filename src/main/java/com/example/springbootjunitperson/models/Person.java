@@ -121,17 +121,17 @@ public class Person {
 Если есть нарушения валидации (violations), мы строим сообщение об ошибке,
 содержащее текст каждого нарушения, и выбрасываем IllegalArgumentException.
  */
-    public void validate() {
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
-
-        Set<ConstraintViolation<Person>> violations = validator.validate(this);
-        if (!violations.isEmpty()) {
-            StringBuilder errorMessage = new StringBuilder();
-            for (ConstraintViolation<Person> violation : violations) {
-                errorMessage.append(violation.getMessage()).append("\n");
-            }
-            throw new IllegalArgumentException(errorMessage.toString());
-        }
-    }
+//    public void validate() {
+//        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+//        Validator validator = factory.getValidator();
+//
+//        Set<ConstraintViolation<Person>> violations = validator.validate(this);
+//        if (!violations.isEmpty()) {
+//            StringBuilder errorMessage = new StringBuilder();
+//            for (ConstraintViolation<Person> violation : violations) {
+//                errorMessage.append(violation.getMessage()).append("\n");
+//            }
+//            throw new IllegalArgumentException(errorMessage.toString());
+//        }
+//    }
 }
