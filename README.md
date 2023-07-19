@@ -62,3 +62,47 @@ Create 2 tests that test the method for a checked type thrown exception for inva
 
 - .isInternalServerError(): Проверяет, что статус ответа равен 500 (Внутренняя ошибка сервера).
 
+### ParameterizedTest
+
+@ParameterizedTest - выполнение теста несколько раз с разными аргументами.
+
+Мы должны объявить по крайней мере один источник аргументов, предоставляющий аргументы для каждого вызова, которые будут использоваться в тестовом методе.
+
+Аннотация @MethodSource позволяет указать статический метод, который возвращает поток (Stream) значений, которые будут использоваться для параметризации теста.
+
+Когда параметризированный тест запускается, JUnit 5 вызывает указанный метод для получения потока значений, и каждое значение из потока используется в отдельном запуске теста.
+
+```
+ @ParameterizedTest
+    @MethodSource("providePeopleList")
+    void testFindAll(List<Person> personList) {
+
+        System.out.println("Running testFindAll with parameters: " + personList);
+        // Создание заглушки для возвращаемого значения peopleRepository.findAll()
+        when(peopleRepository.findAll()).thenReturn(personList);
+
+        // Вызов метода findAll() в сервисном классе
+        List<Person> actualPeople = peopleService.findAll();
+
+        // Проверка, что возвращаемое значение соответствует ожидаемому
+        assertEquals(personList, actualPeople);
+
+        verify(peopleRepository, times(1)).findAll();
+    }
+
+    static Stream<List<Person>> providePeopleList() {
+        // Возвращаем стрим с различными списками объектов Person
+        List<Person> personList1 = new ArrayList<>();
+        personList1.add(new Person(1, "John", 18, "1@l.com"));
+        personList1.add(new Person(2, "Deleted John", 18, "1@l.com"));
+
+        List<Person> personList2 = new ArrayList<>();
+        personList2.add(new Person(3, "Alice", 25, "2@l.com"));
+        personList2.add(new Person(4, "Bob", 30, "3@l.com"));
+
+        return Stream.of(personList1, personList2);
+    }
+```
+
+
+
