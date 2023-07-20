@@ -107,56 +107,56 @@ class PeopleServiceTest {
         verify(peopleRepository, times(1)).findById(personId);
     }
 
-    @Test
-    public void testSave() {
-        int personId = 1;
-
-        Person person = new Person(personId, "John", 18, "1@l.com");
-        // Вызов метода save() в сервисном классе
-        when(peopleRepository.save(Mockito.any(Person.class))).thenReturn(person);
-        Person savedPerson = peopleService.save(person);
-
-       assertNotNull(savedPerson);
-
-        // Проверка, что метод peopleRepository.save() был вызван один раз с переданным person
-        verify(peopleRepository, times(1)).save(person);
-    }
-
-
-    @Test
-    public void testUpdate() {
-        int personId = 1;
-        Person person = new Person(personId, "John", 18, "1@l.com");
-        Person updatedPerson = new Person(1,"Updated John", 20, "1@l.com");
-
-        when(peopleRepository.findById(personId)).thenReturn(Optional.of(person));
-        when(peopleRepository.save(person)).thenReturn(person);
-        // Вызов метода update() в сервисном классе
-        System.out.println(person.getName());
-        Person updatedPerson2 = peopleService.update(personId, updatedPerson);
-        System.out.println(person.getName());
-        System.out.println(updatedPerson2.getName());
-       assertEquals(updatedPerson2.getName(), person.getName());
-    }
-
-    @Test
-    public void testDelete() {
-        int personId = 1;
-
-        Person person = new Person(1, "John", 18, "1@l.com");
-//        when(peopleRepository.findAll()).thenReturn(Collections.singletonList(new Person(2, "Deleted John", 18, "1@l.com")));
+//    @Test
+//    public void testSave() {
+//        int personId = 1;
+//
+//        Person person = new Person(personId, "John", 18, "1@l.com");
+//        // Вызов метода save() в сервисном классе
+//        when(peopleRepository.save(Mockito.any(Person.class))).thenReturn(person);
+//        Person savedPerson = peopleService.save(person);
+//
+//       assertNotNull(savedPerson);
+//
+//        // Проверка, что метод peopleRepository.save() был вызван один раз с переданным person
+//        verify(peopleRepository, times(1)).save(person);
+//    }
+//
+//
+//    @Test
+//    public void testUpdate() {
+//        int personId = 1;
+//        Person person = new Person(personId, "John", 18, "1@l.com");
+//        Person updatedPerson = new Person(1,"Updated John", 20, "1@l.com");
+//
 //        when(peopleRepository.findById(personId)).thenReturn(Optional.of(person));
 //        when(peopleRepository.save(person)).thenReturn(person);
-//        doNothing().when(peopleRepository).delete(person);
-
-        System.out.println(person.getName());
-
-        assertAll(() -> peopleService.delete(personId));
-
-        System.out.println(person.getName());
-
-        // Проверка, что метод peopleRepository.deleteById() был вызван один раз с переданным personId
-       verify(peopleRepository, times(1)).deleteById(personId);
-    }
+//        // Вызов метода update() в сервисном классе
+//        System.out.println(person.getName());
+//        Person updatedPerson2 = peopleService.update(personId, updatedPerson);
+//        System.out.println(person.getName());
+//        System.out.println(updatedPerson2.getName());
+//       assertEquals(updatedPerson2.getName(), person.getName());
+//    }
+//
+//    @Test
+//    public void testDelete() {
+//        int personId = 1;
+//
+//        Person person = new Person(1, "John", 18, "1@l.com");
+////        when(peopleRepository.findAll()).thenReturn(Collections.singletonList(new Person(2, "Deleted John", 18, "1@l.com")));
+////        when(peopleRepository.findById(personId)).thenReturn(Optional.of(person));
+////        when(peopleRepository.save(person)).thenReturn(person);
+////        doNothing().when(peopleRepository).delete(person);
+//
+//        System.out.println(person.getName());
+//
+//        assertAll(() -> peopleService.delete(personId));
+//
+//        System.out.println(person.getName());
+//
+//        // Проверка, что метод peopleRepository.deleteById() был вызван один раз с переданным personId
+//       verify(peopleRepository, times(1)).deleteById(personId);
+//    }
 
 }

@@ -1,6 +1,7 @@
 package com.example.springbootjunitperson.repositories;
 
 import com.example.springbootjunitperson.models.Person;
+import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -31,6 +32,7 @@ public class PeopleRepositoryTest {
         peopleRepository.save(person);
 
         assertTrue(person.getId() > 0);
+     //   Assumptions.assumeTrue(person.getId() < 0);
     }
     @Test
     public void getPersonTest(){
@@ -38,7 +40,7 @@ public class PeopleRepositoryTest {
 
         Person person = getPersonById(personId);
 
-        assertEquals(person.getId(), personId);
+        assertEquals(personId,person.getId());
 
     }
 
@@ -56,9 +58,10 @@ public class PeopleRepositoryTest {
     public void updateEmployeeTest(){
 
         Person person = getPersonById(1);
+       // System.out.println(person);
         person.setEmail("ram@gmail.com");
         Person personUpdated =  peopleRepository.save(person);
-
+        //System.out.println(personUpdated);
         assertEquals(personUpdated.getEmail(),"ram@gmail.com");
     }
 

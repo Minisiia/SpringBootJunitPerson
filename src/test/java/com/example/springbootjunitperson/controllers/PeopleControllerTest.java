@@ -71,7 +71,8 @@ class PeopleControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("people/show"))
                 .andExpect(model().attributeExists("person"))
-                .andExpect(model().attribute("person", person));
+                .andExpect(model().attribute("person", person))
+                .andDo(print());
     }
 
     /*
